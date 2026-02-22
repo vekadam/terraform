@@ -1,7 +1,8 @@
 pipeline {
-    agent any
-    environment {
-        AWS_DEFAULT_REGION = "ap-south-1"
+    agent {
+        docker {
+            image 'hashicorp/terraform:1.6.6'
+        }
     }
     stages {
         stage('Checkout') {
