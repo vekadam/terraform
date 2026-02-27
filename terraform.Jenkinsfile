@@ -2,15 +2,20 @@ pipeline {
     agent any 
 
     stages{
+
+        stage('Git') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Terraform init') {
             agent {
                 docker {
                     image 'hashicorp/terraform:latest'
-                    args '-u root'
+                    args '--entrypoint=""'
                 }
             }
             steps {
-                checkout scm
                 sh '''
                     terraform --version
                     terraform init -input=false
